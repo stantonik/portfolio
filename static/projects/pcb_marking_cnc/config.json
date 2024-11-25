@@ -1,0 +1,19 @@
+{
+        "name": "2D CNC from Scavenging",
+        "title": "A homemade CNC for PCB etching",
+        "summary": "I wanted to make a homemade PCB, so I designed a cost-effective CNC machine using only materials I had on hand. This $0 CNC machine holds a permanent marker, which is used to draw and shield the copper traces on the board, protecting them from the acid during the etching process.",
+        "info": {
+                "year": 0,
+                "topics": ["Mechanics", "Embedded programming"]
+        },
+        "sections": {
+                "Overview": {
+                        "picture_cnt": 1,
+                        "text": ""
+                },
+                "Results": {
+                        "picture_cnt": 2,
+                        "text": ""
+                }
+        }
+}

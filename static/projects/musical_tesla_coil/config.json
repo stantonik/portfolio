@@ -1,0 +1,19 @@
+{
+        "name": "Musical Tesla Coil",
+        "title": "SSTC",
+        "summary": "I've previously built a large spark gap Tesla Coil, but I wanted to create one that could play music. I've started to look at Solid State Tesla Coils. They were much more interesting, but also far more challenging.",
+        "info": {
+                "year": 2023,
+                "topics": ["High voltage", "Converter", "Electronics"]
+        },
+        "sections": {
+                "Overview": {
+                        "picture_cnt": 3,
+                        "text": ""
+                },
+                "Fabrication": {
+                        "picture_cnt": 5,
+                        "text": ""
+                }
+        }
+}

@@ -1,0 +1,19 @@
+{
+        "name": "Bluetooth Amplifier",
+        "title": "A 2-in-1 Bluetooth Speaker and Guitar Amplifier",
+        "summary": "I wanted a guitar amplifier, so I built one that also works as a Bluetooth speaker. Through this project, I learned a great deal about audio processing and amplification.",
+        "info": {
+                "year": 2023,
+                "topics": ["Analog electronics"]
+        },
+        "sections": {
+                "Overview": {
+                        "picture_cnt": 1,
+                        "text": ""
+                },
+                "Fabrication": {
+                        "picture_cnt": 2,
+                        "text": "Many of the schematics available online proved ineffective, so I had to reverse-engineer my broken guitar amplifier to figure out how to make it work. My design features three main parts: the preamp, the amplifier (TDA7297 IC), and the equalizer. All the parts were sourced from scavenging. The aesthetic design is still a work in progress."
+                }
+        }
+}
