@@ -1,0 +1,47 @@
+.photo-grid {
+        display: grid;
+        box-sizing: border-box;
+        padding: 0 20px;;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+}
+
+@media (max-width: 768px) {
+        .photo-grid {
+                grid-template-columns: repeat(1, 1fr);
+        }
+}
+
+.photo img {
+        aspect-ratio: 1/1;
+        width: 100%; 
+        object-fit: cover;
+}
+
+.photo {
+        position: relative;
+        overflow: hidden;
+}
+
+.overlay {
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        box-sizing: border-box;
+        justify-content: space-between;
+        padding: 5%;
+        opacity: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        color: white;
+        transition: opacity 0.1s ease-in;
+}
+
+.overlay:hover {
+        opacity: 1;
+}
+

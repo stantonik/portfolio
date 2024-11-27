@@ -3,16 +3,51 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="static/style.css">
-        <title>Stanley Arnaud</title>
+        <link rel="stylesheet" href="static/base.css">
+        <link rel="stylesheet" href="static/exp_style.css">
+        <title>Stanley Arnaud | Experiments</title>
         <meta name="description" content="Stanley Arnaud's portfolio">
-        <script src="./static/base.js"></script>
+        <script src="static/base.js"></script>
+        <script src="static/experiments.js"></script>
     </head>
     <body>
         <div id="header"></div>
         <main>
+            <h1 style="margin:0;">Experiments</h1>
+            <div style="display: flex; width: 100%;">
+                <p style="width: 50%;">
+                Here are a selection of alternative projects, experiences, and discoveries, highlighting their significance and lasting importance.        
+                </p>
+            </div>
 
+            <div id="school" class="section">
+                <h2>> School</h2>
+
+                <div class="photo-grid">
+                    <template id="exp-template" class="photo">
+                        <div class="overlay">
+                            <div>
+                                <h3></h3>
+                                <p>Year: <span class="year"></span></p>
+                                <p>Topics: <span class="topics"></span></p>
+                            </div>
+                            <p class="summary"></p>
+                        </div>
+                        <img src="">
+                    </template>
+                </div>
+            </div>
+
+            <div id="miscellaneous" class="section">
+                <h2>> Miscellaneous</h2>
+                <div class="photo-grid">
+
+                </div>
+
+            </div>
         </main>
         <div id="footer"></div>
+
+        <script>populateExperiments()</script>
     </body>
 </html>

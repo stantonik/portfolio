@@ -1,15 +1,97 @@
 {
-        "name": "",
-        "title": "",
-        "summary": "",
+    "general_cnc": {
+        "name": "Multi-purpose CNC",
+        "title": "Need a 3D printer or a milling machine ?",
+        "summary": "I decided to build my own low-budget 3D printer from scratch (I may have stolen some parts from my school). My focus has been on developing the software and web user interface on esp32. While the software isn't finished yet, I'm getting close. Goal : interchangeable head (milling, laser..).",
         "info": {
-                "year": 0,
-                "topics": []
+            "year": 2024,
+            "topics": ["Mechanics", "Embedded programming"]
         },
         "sections": {
-                "Overview": {
-                        "picture_cnt": 0,
-                        "text": ""
-                }
+            "Overview": {
+                "picture_cnt": 1,
+                "text": ""
+            },
+            "Fabrication": {
+                "picture_cnt": 1,
+                "text": ""
+            }
         }
+    },
+
+    "sstc1": {
+        "name": "Musical Tesla Coil",
+        "title": "SSTC",
+        "summary": "I've previously built a large spark gap Tesla Coil, but I wanted to create one that could play music. I've started to look at Solid State Tesla Coils. They were much more interesting, but also far more challenging.",
+        "info": {
+            "year": 2023,
+            "topics": ["High voltage", "Converter", "Electronics"]
+        },
+        "sections": {
+            "Overview": {
+                "picture_cnt": 3,
+                "text": ""
+            },
+            "Fabrication": {
+                "picture_cnt": 5,
+                "text": ""
+            }
+        }
+    },
+
+    "btspeaker" : {
+        "name": "Bluetooth Amplifier",
+        "title": "A 2-in-1 bluetooth speaker and guitar amplifier",
+        "summary": "I wanted a guitar amplifier, so I built one that also works as a bluetooth speaker. Through this project, I learned a great deal about audio processing and amplification.",
+        "info": {
+            "year": 2023,
+            "topics": ["Analog electronics"]
+        },
+        "sections": {
+            "overview": {
+                "picture_cnt": 1,
+                "text": ""
+            },
+            "fabrication": {
+                "picture_cnt": 2,
+                "text": "Many of the schematics available online proved ineffective, so i had to reverse-engineer my broken guitar amplifier to figure out how to make it work. my design features three main parts: the preamp, the amplifier (tda7297 ic), and the equalizer. all the parts were sourced from scavenging. the aesthetic design is still a work in progress."
+            }
+        }
+    },
+
+    "pcbcnc": {
+        "name": "2D CNC from Scavenging",
+        "title": "A homemade CNC for PCB etching",
+        "summary": "I wanted to make a homemade PCB, so I designed a cost-effective CNC machine using only materials I had on hand. This $0 CNC machine holds a permanent marker, which is used to draw and shield the copper traces on the board, protecting them from the acid during the etching process.",
+        "info": {
+            "year": 0,
+            "topics": ["Mechanics", "Embedded programming"]
+        },
+        "sections": {
+            "Overview": {
+                "picture_cnt": 1,
+                "text": ""
+            },
+            "Results": {
+                "picture_cnt": 2,
+                "text": ""
+            }
+        }
+    },
+
+    "minecraft": {
+        "name": "Remake of Minecraft",
+        "title": "The world famous game remade",
+        "summary": "Minecraft has always been my favorite childhood game. I admire its efficiency—simple in concept, yet limitless in possibilities. I often wish I had come up with the idea first, but would I have been able to code it myself? Here’s my attempt.",
+        "info": {
+            "year": 2022,
+            "topics": ["OpenGL", "Programmation", "C++"]
+        },
+        "sections": {
+            "Overview": {
+                "picture_cnt": 3,
+                "text": "Sint sed enim consectetur velit sed esse nulla occaecat veniam ut sed sed. Et sint enim exercitation elit culpa proident ad ex ea sit ipsum nisi do cillum ipsum. Nisi ad minim quis ipsum in reprehenderit magna adipiscing duis in aliqua veniam ex eiusmod enim labore aliqua magna fugiat."
+            }
+        }
+    }
 }

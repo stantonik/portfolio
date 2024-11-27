@@ -1,20 +1,11 @@
 var projects = []
 
 class Project {
-        constructor(config) {
-                this.name = "";
-                this.path = "";
+        constructor(id, config) {
+                this.id = id;
+                this.path = `./static/projects/${id}/`;
                 this.config = config;
                 this.projectSection = document.getElementById("projects");
-        }
-
-        static async create(name)
-        {
-                const config = await fetch("./static/projects/" + name + "/config.json").then(res => res.json());
-                const proj = new Project(config);
-                proj.name = name;
-                proj.path = "./static/projects/" + proj.name + "/";
-                return proj;
         }
 
         writeDemo ()
@@ -52,7 +43,7 @@ class Project {
 
                 elmt = projSum.querySelector(".image-container");
                 elmt.addEventListener("click", () => {
-                        window.location.href = "project.html?name=" + this.name;
+                        window.location.href = "project.html?id=" + this.id;
                 })
 
                 this.projectSection.appendChild(projSum); 
@@ -61,13 +52,14 @@ class Project {
 
 async function populateProjects()
 {
-        let projectNames = await fetch("./static/projects/list.json").then(res => res.json()).then(data => data.projects);
-        for (let i = 0; i < projectNames.length; i++)
-        {
-                let proj = await Project.create(projectNames[i]);
+        let projectConfigs = await fetch("./static/projects/config.json").then(res => res.json())
+
+        for (const projectName of Object.keys(projectConfigs)) {
+                const config = projectConfigs[projectName];
+
+                let proj = new Project(projectName, config);
                 proj.writeDemo();
                 projects.push(proj);
-
         }
 }
 
@@ -75,8 +67,10 @@ async function writeProject()
 {
         const url = new URL(window.location.href);
         const params = new URLSearchParams(url.search);
+        const id = params.get("id");
 
-        const proj = await Project.create(params.get("name"));
+        let config = await fetch("./static/projects/config.json").then(res => res.json()).then(data => data[id]);
+        const proj = new Project(id, config);
 
         document.title += " | " + proj.config.name;
 

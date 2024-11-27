@@ -1,0 +1,33 @@
+{
+        "nailit": {
+                "title": "Nail it!",
+                "year": 2024,
+                "topics": ["Game development", "Python"],
+                "summary": "A remake of the popular osu! beatmap 'Hammer Time' made with pygame. You can play the game with a custom Arduino-like controller via serial. You can also display player data visualizations.",
+                "img_cnt": 3
+        },
+
+        "elock": {
+                "title": "E-Lock",
+                "year": 2024,
+                "topics": ["Embedded Programming", "Mechanics"],
+                "summary": "This project focuses on developing a Wi-Fi-enabled smart door lock that enhances home security and convenience by allowing users to control their door lock via a smartphone. The lock integrates seamlessly with mobile devices and enables real-time locking and unlocking through a dedicated mobile web app.",
+                "img_cnt": 227
+        },
+
+        "gameboy": {
+                "title": "Gameboy",
+                "year": 2024,
+                "topics": ["Embedded programming", "Network"],
+                "summary": "A variation of the game of Nim as a networked multiplayer game (TCP via WiFi) implemented for ESP-based devices in a flower shape, where the players take turns to remove one, two or three petals until none are left. The looser is the player picking the last petal. This project uses the ESP32 microcontroller and a small OLED display for interactive gameplay.",
+                "img_cnt": 160
+        },
+
+        "planetviewer": {
+                "title": "Planet Viewer",
+                "year": 2024,
+                "topics": ["Programmation", "WebGL", "Ray Marching"],
+                "summary": "A web application that allows you to explore your favorite planets in the solar system using WebGL and ray marching techniques.",
+                "img_cnt": 4
+        }
+}
