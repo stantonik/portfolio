@@ -1,0 +1,30 @@
+#experiment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.experiment {
+    position: relative;
+}
+
+.experiment img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.experiment .description {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.experiment .description:hover {
+    opacity: 1;
+}

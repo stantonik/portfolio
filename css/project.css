@@ -1,0 +1,51 @@
+#description {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    gap: 1vw;
+}
+
+#summary {
+    text-align: justify;
+    width: 70%;
+}
+
+#info {
+    padding-top: 20px;
+}
+
+#info p {
+    margin : 0;
+}
+
+#date, #topics {
+    color: gray;
+    font-style: italic;
+}
+
+.gallery {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+        padding: 20px 0;
+        box-sizing: border-box; 
+        width: 100%;
+        max-width: 100%;
+}
+
+.gallery img {
+        aspect-ratio: 4 / 3;
+        height: 300px;
+        width: auto;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        z-index: 0;
+}
+.gallery::-webkit-scrollbar {
+        display: none;
+}
+.gallery img:hover {
+        transform: scale(1.05);
+        z-index: 6;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+        <base href="/portfolio" />
+        <script src="./js/base.js"></script>
+        <script src="./js/bucket.js"></script>
+        <script src="./js/project.js"></script>
+        <script src="./js/marked.min.js"></script>
+        <script src="./js/utils.js"></script>
+        <link href="./css/base.css" rel="stylesheet">
+        <link href="./css/markdown.css" rel="stylesheet">
+        <link href="./css/project.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/default.min.css">
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/c.min.js"></script>
+    </head>
+    <body>
+        <!-- <header id="header"></header> -->
+
+        <main>
+            <a href="#"><h2 id="return-button">⏎</h2></a>
+
+            <div id="description">
+                <div id="info">
+                    <p>Date: <span id="date"></span></p>
+                    <p>Topics: <span id="topics"></span></p>
+                </div>
+                <div id="summary">
+                    <h3></h3>
+                    <p></p>
+                </div>
+            </div>
+            <div class="gallery"></div>
+            <div id="content"></div>
+
+            <script>populatePage();</script>
+        </main>
+
+        <footer id="footer"></footer>
+    </body>
+</html>
+

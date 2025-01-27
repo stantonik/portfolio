@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Stanley Arnaud - experiments</title>
+        <base href="/portfolio" />
+        <script src="./js/base.js"></script>
+        <script src="./js/marked.min.js"></script>
+        <script src="./js/utils.js"></script>
+        <script src="./js/bucket.js"></script>
+        <script src="./js/experiments.js"></script>
+
+        <link href="./css/base.css" rel="stylesheet">
+        <link href="./css/experiments.css" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            <a href="#"><h2 id="return-button">⏎</h2></a>
+
+            <p>
+            This page in under construction...
+            </p>
+
+            <div id="experiment-grid"></div>
+
+            <script>loadPage();</script>
+
+            <template id="exp-template">
+                <div class="experiment">
+                    <a class="img-link"><img></a>
+                    <div class="description">
+                        <h3 class="title"></h3>
+                        <div class="info">
+                            <span class="date"></span>
+                            <span class="topics"></span>
+                        </div>
+                        <p class="summary"></p>
+                    </div>
+                </div>
+            </template>
+        </main>
+
+        <footer id="footer"></footer>
+    </body>
+</html>

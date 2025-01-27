@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Stanley Arnaud</title>
+        <script src="./js/base.js"></script>
+        <script src="./js/bucket.js"></script>
+        <script src="./js/index.js"></script>
+        <link href="./css/base.css" rel="stylesheet">
+        <link href="./css/index.css" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            <div id="home-container">
+                <div id="home-title">
+                    <h1>ＳＴＡＮＬＥＹ ＡＲＮＡＵＤ</h1>
+                    <div id="static-header"></div>
+                    <script>loadComponent('./components/header.html', document.getElementById("static-header"));</script>
+                </div>
+                <p>
+                Welcome here!<br><br>I have always been driven by a passion for building and understanding how things work at a fundamental level. Throughout my journey, I have worked on various hands-on projects that reflect this curiosity.
+                </p>
+                <div id="projects-heading">
+                    <h2 >projects<br>↓</h2>
+                </div>
+            </div>
+            <div id="projects-container"></div>
+            <script>populateProject();</script>
+
+            <!-- Templates -->
+            <template id="project-template-right">
+                <div class="project right">
+                    <div class="description-container">
+                        <div>
+                            <h3 class="title"></h3>
+                            <div class="info">
+                                <span class="topics"></span>
+                                <span class="date"></span>
+                            </div>
+                        </div>
+                        <p class="summary"></p>
+                    </div>
+                    <div class="image-container">
+                        <a href="?"><img src=""></a>
+                    </div>
+                </div>
+            </template>
+            <template id="project-template-left">
+                <div class="project left">
+                    <div class="image-container">
+                        <a href="?"><img src=""></a>
+                    </div>
+                    <div class="description-container">
+                        <div>
+                            <h3 class="title"></h3>
+                            <div class="info">
+                                <span class="date"></span>
+                                <span class="topics"></span>
+                            </div>
+                        </div>
+                        <p class="summary"></p>
+                    </div>
+                </div>
+            </template>
+            <template id="project-template-center">
+                <div class="project center">
+                    <div class="title-container">
+                        <h3 class="title"></h3>
+                        <div class="info">
+                            <span class="date"></span>
+                            <span class="topics"></span>
+                        </div>
+                    </div>
+                    <a href="?"><img src=""></a>
+                    <p class="summary"></p>
+                </div>
+            </template>
+        </main>
+
+        <footer id="footer"></footer>
+    </body>
+</html>
+

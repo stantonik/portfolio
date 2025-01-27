@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(90, 90, 90);
+    transition: color 0.2s ease-in;
+}
+
+a:hover {
+    color: rgb(150, 150, 150);
+}
+
+img {
+    filter: brightness(1);
+    transition: transform 0.3s ease, filter 0.3s ease;
+    z-index: 0;
+}
+
+img:hover:not(#modal img) {
+    transform: scale(1.02);
+    filter: brightness(1.05);
+    z-index: 6;
+}
+
+main {
+    margin: 5vh 15vw;
+    padding: 0 5vw 0 5vw;
+    flex-grow: 1;
+    overflow: auto;
+}
+
+@media (max-aspect-ratio: 10/7) {
+    main {
+        margin: 5vh 2vw;
+    }
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    height: 60px;
+    width: 100%;
+    gap: 50px;
+    z-index: 6;
+    background: linear-gradient(to bottom, white 50%, transparent 100%);
+    flex-shrink: 0;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+header.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+header div {
+    display: flex;
+    gap: 10px;
+}
+
+footer {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+footer * {
+    margin: 0;
+}
+
+#modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    /* padding: 10vh 10vw; */
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+
+    background-color: rgba(1, 1, 1, 0.3);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+#modal.show {
+    display: flex;
+    flex-direction: column;
+}
+
+#modal img {
+    width: 70%;
+}
+
+#modal span {
+    font-size: xx-large;
+    color: white;
+}
+
+#modal span:hover {
+    cursor: pointer;
+}
+
+#modal p {
+    color: white;
+}
+
+#return-button {
+    margin: 0;
+}
+
+
