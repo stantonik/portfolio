@@ -1,0 +1,6 @@
+
+.projectContainer {
+    display: flex;
+    flex-direction: row;
+}
+
