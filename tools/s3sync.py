@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Union, Optional
 import subprocess, sys
 import shutil
+import fnmatch
 
 import automations
 
@@ -26,11 +27,11 @@ S3_NAME = "portfoliosa"
 S3_URL = f"s3://{S3_NAME}"
 
 LOCAL_DIR = Path("public/s3")
-S3_SYNC_DIR = Path(".cache/s3")
+S3_SYNC_DIR = Path("public/.cache/s3")
 
 ASSET_MANIFEST_REL_PATH = Path("assets-manifest.json")
 
-IGNORED_NAMES = [".DS_Store"]
+ignored_patterns = [".DS_Store", "*/original/*"]
 
 """
 Utils
@@ -77,6 +78,27 @@ def filename_get_hash(path: Path) -> Optional[str]:
         return None
     return path.stem.split('.')[1]
 
+def is_ignored(path, patterns, root):
+    """Check if a path matches any ignore pattern."""
+    rel_path = str(path.relative_to(root))
+    for pattern in patterns:
+        if fnmatch.fnmatch(rel_path, pattern) or fnmatch.fnmatch(path.name, pattern):
+            return True
+    return False
+
+def format_size(size_bytes):
+    """Convert a file size in bytes to a human-readable string."""
+    if size_bytes == 0:
+        return "0 B"
+    
+    # Binary prefixes
+    units = ["B", "KiB", "MiB", "GiB", "TiB", "PiB"]
+    i = 0
+    while size_bytes >= 1024 and i < len(units) - 1:
+        size_bytes /= 1024
+        i += 1
+    return f"{size_bytes:.2f} {units[i]}"
+
 def aws_s3_sync(src: Path | str, dst: Path | str, opts: list[str] = []) -> None:
     cmd = ['aws', 's3', 'sync', str(src), str(dst), '--delete', '--exact-timestamps'] + opts
     res = subprocess.run(cmd, stdout=sys.stdout, stderr=subprocess.PIPE, text=True)
@@ -84,7 +106,7 @@ def aws_s3_sync(src: Path | str, dst: Path | str, opts: list[str] = []) -> None:
         raise Exception(str(res.stderr))
 
 def gen_asset_manifest(dir: Path) -> dict[str, str]:
-    data = { str(filename_remove_hash(f.relative_to(dir))): str(filename_insert_hash(f.relative_to(dir), make_hash(f))) for f in filter(lambda f: f.is_file() and f.name not in IGNORED_NAMES, dir.rglob('*')) }
+    data = { str(filename_remove_hash(f.relative_to(dir))): str(filename_insert_hash(f.relative_to(dir), make_hash(f))) for f in filter(lambda f: f.is_file() and not is_ignored(f, ignored_patterns, dir), dir.rglob('*')) }
     return data
 
 def compare(src_manifest: dict, dst_manifest: dict) -> tuple[dict, dict, dict]:
@@ -105,11 +127,11 @@ def handle_status(_) -> None:
         return
 
     for f, _ in to_add.items():
-        print(f"\033[92m+ Added: {f}\033[0m")
+        print(f"\033[92m+ Added: {f} ({format_size((LOCAL_DIR/f).stat().st_size)})\033[0m")
     for f, _ in to_remove.items():
         print(f"\033[91m- Deleted: {f}\033[0m")
     for f, hfs in edited.items():
-        print(f"\033[93mx Edited: {f} (sha{filename_get_hash(Path(hfs['src']))} -> sha{filename_get_hash(Path(hfs['dst']))})\033[0m")
+        print(f"\033[93mx Edited: {f} (sha:{filename_get_hash(Path(hfs['dst']))}, {format_size((S3_SYNC_DIR/hfs['dst']).stat().st_size)}) -> (sha:{filename_get_hash(Path(hfs['src']))},{format_size((LOCAL_DIR/f).stat().st_size)})\033[0m")
 
 def handle_push(_) -> None:
     local_manifest = gen_asset_manifest(LOCAL_DIR)
@@ -192,7 +214,7 @@ if __name__ == "__main__":
     S3_SYNC_DIR.mkdir(exist_ok=True, parents=True)
     LOCAL_DIR.mkdir(exist_ok=True, parents=True)
 
-    IGNORED_NAMES.append(ASSET_MANIFEST_REL_PATH.name)
+    ignored_patterns.append(ASSET_MANIFEST_REL_PATH.name)
 
     script_name = sys.argv[0]
 

@@ -5,7 +5,6 @@
  * Distributed under terms of the MIT license.
  */
 
-import '../components/window.css';
 import '../css/home.css'
 import { getAssetUrl } from '../utils';
 
