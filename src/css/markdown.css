@@ -1,0 +1,137 @@
+/*
+ * markdown.css
+ * Copyright (C) 2025 stantonik
+ *
+ * Distributed under terms of the MIT license.
+ */
+
+#markdownContainer {
+    margin-top: 1rem;
+    margin-bottom: 10rem;
+}
+
+img,
+video {
+    max-height: 30rem;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0.5rem auto;
+}
+
+blockquote {
+    background-color: #1e1e1e;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0 1rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid #ebdbb2;
+    white-space: pre-wrap;
+}
+
+.gallery {
+    display: flex;
+    overflow-x: auto;
+    margin: 0;
+    gap: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.gallery::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery>p {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    text-align: center;
+    color: gray;
+    font-style: italic;
+}
+
+.gallery img,
+.gallery video {
+    height: 15rem;
+    width: auto;
+    object-fit: contain;
+}
+
+.gallery p span {
+}
+
+.inline {
+    display: flex;
+    gap: 1rem;
+}
+
+.inline p {
+    max-width: 50%;
+}
+
+.vim-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    font-family: monospace;
+    font-size: 14px;
+    background-color: #3c3836;
+    /* gruvbox bg1 */
+    color: #ebdbb2;
+    /* fg1 */
+    border-top: 1px solid #282828;
+}
+
+.vim-left,
+.vim-center,
+.vim-right {
+    padding: 0 8px;
+}
+
+.vim-left {
+    background-color: #98971a;
+    /* green */
+    color: #282828;
+    font-weight: bold;
+}
+
+.vim-center {
+    flex: 1;
+}
+
+.vim-right {
+    margin-left: auto;
+}
+
+.linter {
+    padding: 6px 12px;
+    margin: 8px 0;
+    font-size: 14px;
+    background-color: #3c3836;
+    /* gruvbox dark bg */
+}
+
+.linter.error {
+    color: #fb4934;
+}
+
+.linter.warning {
+    border-left: 4px solid #fabd2f;
+    color: #fabd2f;
+}
+
+.linter-header {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.linter ol {
+    margin: 0;
+    padding-left: 1.5em;
+}

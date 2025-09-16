@@ -5,10 +5,11 @@
  * Distributed under terms of the MIT license.
  */
 
+import '../components/window.css';
 import '../css/home.css'
 import { getAssetUrl } from '../utils';
 
-export default function Home(): HTMLElement {
+export default async function Home(): Promise<HTMLElement> {
     const container = document.createElement("div");
 
     // Title
@@ -33,20 +34,20 @@ export default function Home(): HTMLElement {
 
     // Projects list
     const projectSection = document.createElement("section");
-    fetch(getAssetUrl("projects/projects.json"))
-      .then((res) => {
-        if (res.ok) {
-          return res.text();
-        } else {
-          throw new Error("Failed to fetch JSON");
+    const res = await fetch(getAssetUrl("projects/projects.json"));
+    const json = await res.json();
+    for (const name in json) {
+        const data = json[name];
+        if (data.title == null) {
+            continue;
         }
-      })
-      .then((text) => {
-        projectSection.innerText = text;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+        const projectDiv = document.createElement("div");
+        const link = document.createElement("a");
+        link.textContent = data.title;
+        link.href = "/project?name=" + name;
+        projectDiv.appendChild(link);
+        projectSection.appendChild(projectDiv);
+    }
 
     container.appendChild(presSection);
     container.appendChild(projectSection);

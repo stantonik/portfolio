@@ -9,6 +9,7 @@ type RouteHandler = () => Promise<HTMLElement> | HTMLElement;
 
 const routes: Record<string, RouteHandler> = {
     "/": () => import("./views/home").then(m => m.default()),
+    "/project": () => import("./views/project").then(m => m.default()),
 };
 
 export async function handleRoute(path: string): Promise<void> {

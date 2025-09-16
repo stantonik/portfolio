@@ -56,6 +56,19 @@ html, body {
     align-items: center;
 }
 
+a,
+a:visited,
+a:hover,
+a:active {
+    color: inherit;
+    background: none;
+    outline: none;
+}
+
+a:hover {
+    color: darkgrey;
+}
+
 /* Desktop: big side padding via parent container */
 @media (min-width: 800px) {
     body {

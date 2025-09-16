@@ -17,6 +17,8 @@ from typing import Union, Optional
 import subprocess, sys
 import shutil
 
+import automations
+
 """
 Variables
 """
@@ -93,19 +95,6 @@ def compare(src_manifest: dict, dst_manifest: dict) -> tuple[dict, dict, dict]:
     return to_add, to_remove, edited
 
 """
-Automations
-"""
-def auto_create_project_file() -> None:
-    projects = [f.name for f in (LOCAL_DIR/"projects").glob('*') if f.is_dir()]
-    with open(LOCAL_DIR/"projects/projects.json", 'w') as f:
-        json.dump(projects, f, indent=2)
-    print("projects/projects.json well created")
-
-automations = {
-    "projects.json": auto_create_project_file,
-}
-
-"""
 Core
 """
 def handle_status(_) -> None:
@@ -132,9 +121,9 @@ def handle_push(_) -> None:
 
     print("Pushing...")
 
-    if len(automations) > 0:
+    if len(automations.automations) > 0:
         print("Launching automations...")
-        for name, fn in automations.items():
+        for name, fn in automations.automations.items():
             print(f"'{name}' automation:", end=' ')
             fn()
         print("Automations done.")
@@ -192,7 +181,7 @@ def handle_pull(_) -> None:
     print("Pulled.")
 
 def handle_automation(args) -> None:
-    handler = automations.get(args[0])
+    handler = automations.automations.get(args[0])
     if handler:
         handler()
 
