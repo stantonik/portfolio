@@ -5,8 +5,10 @@
  * Distributed under terms of the MIT license.
  */
 
+import fetch from "node-fetch";
+
 // --- Cache manifest in memory with TTL ---
-let assetManifest: Record<string,string> = {};
+let assetManifest: Record<string, string> = {};
 let manifestTimestamp = 0; // in milliseconds
 const MANIFEST_TTL = 10 * 60 * 1000; // 10 minute
 
@@ -31,7 +33,7 @@ async function getManifest(): Promise<Record<string, string>> {
 
     if (!res.ok) throw new Error("Failed to fetch assets-manifest.json");
 
-    assetManifest = await res.json();
+    assetManifest = await res.json() as Record<string, string>;;
     manifestTimestamp = now;
     return assetManifest;
 }
@@ -45,7 +47,6 @@ export default async function handler(req: any, res: any) {
         res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     }
 
-    // Handle preflight OPTIONS request
     if (req.method === "OPTIONS") {
         return res.status(204).end();
     }
@@ -66,36 +67,41 @@ export default async function handler(req: any, res: any) {
         const CDN_AUTH_TOKEN = process.env.CDN_AUTH_TOKEN!;
         const targetUrl = `${CDN_BASE}/${hashedFile}`;
 
-        // Stream request to CDN with auth token
+        // Prepare request headers
+        const headers: Record<string, string> = {
+            ...req.headers,
+            "x-cdn-auth-token": CDN_AUTH_TOKEN,
+        } as any;
+        delete headers.host;
+        delete headers.connection;
+
+        // 🚀 Use node-fetch with compress: false
         const response = await fetch(targetUrl, {
             method: req.method,
-            headers: {
-                ...req.headers,
-                "x-cdn-auth-token": `${CDN_AUTH_TOKEN}`,
-                host: undefined, // remove host header
-            },
+            headers,
+            compress: false, // keep gzip/br intact
         });
 
         // Forward status
         res.status(response.status);
 
-        // Forward response headers
-        response.headers.forEach((value, key) => {
-            res.setHeader(key, value);
+        // Forward headers (skip ones that break streaming)
+        response.headers.forEach((value: string, key: string) => {
+            if (!["transfer-encoding", "content-length"].includes(key.toLowerCase())) {
+                res.setHeader(key, value);
+            }
         });
 
+        // Override cache control for Vercel
         const MAX_VERSEL_TTL = 31536000; // 1 year
         res.setHeader("Cache-Control", `s-maxage=${MAX_VERSEL_TTL}, stale-while-revalidate=60`);
 
-        // Stream body
-        const { Readable } = await import("stream");
+        // Stream body untouched
         if (response.body) {
-            const nodeStream = Readable.fromWeb(response.body as any); // properly converts Web stream
-            nodeStream.pipe(res);
+            response.body.pipe(res);
         } else {
             res.status(204).end();
         }
-
     } catch (err) {
         console.error("CDN Proxy error:", err);
         res.status(500).json({ error: "Failed to fetch asset" });
