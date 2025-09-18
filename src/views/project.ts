@@ -9,7 +9,7 @@ import markdownit from 'markdown-it'
 import markdownItContainer from 'markdown-it-container'
 import markdownItMedia from '@gotfeedback/markdown-it-media';
 import hljs from 'highlight.js'
-import matter from 'gray-matter';
+import matter from 'front-matter';
 
 import { getAssetUrl } from "../utils";
 
@@ -81,19 +81,19 @@ export default async function Project(): Promise<HTMLElement> {
         throw new Error(`Asset not found: ${url}`);
     }
     const raw = await res.text();
-    const { data, content } = matter(raw);
-    const html = md.render(content);
+    const { attributes, body } = matter(raw) as any;
+    const html = md.render(body);
 
     // Create metadata header div
     const headerDiv = document.createElement("div");
     {
-        console.log(data.date);
-        const date = new Date(data.date["year"], data.date["month"] - 1);
+        console.log(attributes.date);
+        const date = new Date(attributes.date["year"], attributes.date["month"] - 1);
         console.log(date);
         const message: LinterMessages = {
-            "Description": [data.desc, date.toLocaleString("en-US", { month: "short", year: "numeric" }) + " [" + data.status + "]"],
-            "Tags": data.tags,
-            "Links": data.links
+            "Description": [attributes.desc, date.toLocaleString("en-US", { month: "short", year: "numeric" }) + " [" + attributes.status + "]"],
+            "Tags": attributes.tags,
+            "Links": attributes.links
         }
         headerDiv.appendChild(createLinterMessages(message, "error"));
     }
@@ -133,7 +133,7 @@ export default async function Project(): Promise<HTMLElement> {
     // Center section
     const center = document.createElement("div");
     center.className = "vim-center";
-    center.textContent = data.title.replace(/ /g, "_") + ".md";
+    center.textContent = attributes.title.replace(/ /g, "_") + ".md";
 
     // Right section
     const right = document.createElement("div");

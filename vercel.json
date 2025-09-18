@@ -1,3 +1,10 @@
 {
-    "devCommand": "vite --port $PORT"
+    "version": 2,
+    "devCommand": "vite --port $PORT",
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/index.html"
+        }
+    ]
 }

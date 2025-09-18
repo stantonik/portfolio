@@ -12,11 +12,6 @@ let assetManifest: Record<string, string> = {};
 let manifestTimestamp = 0; // in milliseconds
 const MANIFEST_TTL = 10 * 60 * 1000; // 10 minute
 
-const ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "https://stanleyarnaud.vercel.app"
-];
-
 async function getManifest(): Promise<Record<string, string>> {
     const now = Date.now();
     if (assetManifest && now - manifestTimestamp < MANIFEST_TTL) {
@@ -33,20 +28,12 @@ async function getManifest(): Promise<Record<string, string>> {
 
     if (!res.ok) throw new Error("Failed to fetch assets-manifest.json");
 
-    assetManifest = await res.json() as Record<string, string>;;
+    assetManifest = await res.json() as Record<string, string>;
     manifestTimestamp = now;
     return assetManifest;
 }
 
 export default async function handler(req: any, res: any) {
-    // --- Dynamic CORS ---
-    const origin = req.headers.origin;
-    if (origin && ALLOWED_ORIGINS.includes(origin)) {
-        res.setHeader("Access-Control-Allow-Origin", origin);
-        res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    }
-
     if (req.method === "OPTIONS") {
         return res.status(204).end();
     }
@@ -75,7 +62,6 @@ export default async function handler(req: any, res: any) {
         delete headers.host;
         delete headers.connection;
 
-        // 🚀 Use node-fetch with compress: false
         const response = await fetch(targetUrl, {
             method: req.method,
             headers,
@@ -95,6 +81,10 @@ export default async function handler(req: any, res: any) {
         // Override cache control for Vercel
         const MAX_VERSEL_TTL = 31536000; // 1 year
         res.setHeader("Cache-Control", `s-maxage=${MAX_VERSEL_TTL}, stale-while-revalidate=60`);
+
+        if (response.status === 304) {
+            return res.status(304).end();
+        }
 
         // Stream body untouched
         if (response.body) {
